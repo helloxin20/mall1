@@ -2,15 +2,11 @@
   <div id="detail">
     <detail-nav-bar class="detail-bar" @titleClick="titleClick" ref="nav">
   </detail-nav-bar>
-   <!-- <div>{{$store.cartList.length}}</div>-->
     <scroll class="wrapper"
             ref="scroll"
             :probe-type="3"
             @scroll="itemScroll"
     >
-      <div><ul>
-        <li v-for="item in $store.state.cartList">{{item}}</li>
-      </ul></div>
     <detail-swiper :top-images="topImages">
     </detail-swiper>
     <detail-base-info :goods="goods"></detail-base-info>
@@ -40,6 +36,7 @@
     import {backTopLinstenerMixin, itemLinstenerMixin} from "../../common/mixins";
     import {debounce} from "../../common/utils";
     import DetailBottomBar from "./childComps/DetailBottomBar";
+    import {mapActions} from 'vuex';
     export default {
         name: "Detail",
         components: {
@@ -102,7 +99,7 @@
                 this.themeTopYs.push(this.$refs.comment.$el.offsetTop)
                 this.themeTopYs.push(this.$refs.recommend.$el.offsetTop)
                 this.themeTopYs.push(Number.MAX_VALUE)
-                console.log(this.themeTopYs)
+                //console.log(this.themeTopYs)
             },100)
 
         },
@@ -110,6 +107,7 @@
 
         },
         methods: {
+            ...mapActions(['addCart']),
             imageLoad() {
                 /*this.$refs.scroll.refresh()*/
                 this.refresh();
@@ -137,15 +135,23 @@
                 this.isShowBackTop = -position.y >1000
             },
             addToCart(){
-                //获取购物车展示的信息
+                //1.获取购物车展示的信息
               const product = {}
               product.iid = this.iid;
               product.realPrice = this.goods.realPrice;
               product.title = this.goods.title;
               product.imge = this.topImages[0];
               product.desc = this.goods.desc;
-              //把商品添加到购物车
-              this.$store.dispatch('addCart',product)//参数为对象
+              //2.把商品添加到购物车 dispatch异步操作，向后台提交数据，添加购物车
+              /*this.$store.dispatch('addCart',product).then(res=>{
+                  console.log(res);
+              })*///参数为对象
+                //2.方法二添加购物车
+                this.addCart(product).then(res=>{
+                   console.log(this.$toast);
+                    this.$toast.show(res,2000)
+                });
+                //3.添加到购物车成功
             }
         },
         destroyed() {

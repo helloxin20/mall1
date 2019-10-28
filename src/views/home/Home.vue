@@ -131,11 +131,11 @@
                 this.isTabFixed = (-position.y) > this.taboffsetTop
             },
 
-            /*loadMore(){
+            loadMore(){
                 console.log('上拉加载更多')
                 this.getHomeGoods(this.currentType)
                 this.$refs.scroll.scroll.refresh()
-            },*/
+            },
             swiperImageLoad(){
                this.taboffsetTop = this.$refs.tabControl2.$el.offsetTop;
             },

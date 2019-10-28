@@ -53,7 +53,7 @@
               this.scroll &&  this.scroll.finishPullUp();
           },
             refresh(){
-                console.log('----s');
+                //console.log('----s');
                 this.scroll && this.scroll.refresh();
 
             },

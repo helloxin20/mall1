@@ -1,5 +1,5 @@
 <template>
-  <div class="goods-info">
+  <div class="goods-info" v-if="Object.keys(detailInfo).length !== 0">
     <div class="info-desc">
       <div class="start"></div>
       <div class="desc">
@@ -8,8 +8,11 @@
       <div class="end"></div>
     </div>
     <div class="info-key">{{detailInfo.detailImage[0].key}}</div>
-    <div class="info-list" n>
-      <img v-for="(item,index) in detailInfo.detailImage[0].list" :key="index" :src="item" alt="" @load="imageLoad">
+    <div class="info-list" >
+      <img v-for="(item,index) in detailInfo.detailImage[0].list"
+           :key="index"
+           :src="item" alt=""
+           @load="imageLoad">
     </div>
   </div>
 </template>
