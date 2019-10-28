@@ -11,6 +11,6 @@ module.exports = {
     }
   },
   publicPath: process.env.NODE_ENV === 'production'
-    ? '/mall1/'
+    ? '/mall1/dist/'
     : '/'
 }
