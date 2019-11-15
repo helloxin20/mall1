@@ -1,5 +1,4 @@
 <template>
-
   <tab-bar>
     <tab-bar-item path="/home" activeColor="deepPink">
       <img slot="item-img" src="~assets/img/tabbar/home.svg" alt="">
